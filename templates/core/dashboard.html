@@ -1,5 +1,74 @@
 {% extends 'base.html' %}
 {% block title %}Dashboard — TaskManager{% endblock %}
+
 {% block content %}
-<h2>Dashboard coming soon...</h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h2>
+    <a href="/tasks/create/" class="btn btn-dark"><i class="fas fa-plus me-1"></i>New Task</a>
+</div>
+
+<!-- Stats Cards -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card text-center shadow-sm p-3">
+            <h1 class="display-4 fw-bold">{{ total }}</h1>
+            <p class="text-muted mb-0">Total Tasks</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center shadow-sm p-3 border-start border-4 border-secondary">
+            <h1 class="display-4 fw-bold text-secondary">{{ todo }}</h1>
+            <p class="text-muted mb-0">To Do</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center shadow-sm p-3 border-start border-4 border-warning">
+            <h1 class="display-4 fw-bold text-warning">{{ in_progress }}</h1>
+            <p class="text-muted mb-0">In Progress</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center shadow-sm p-3 border-start border-4 border-success">
+            <h1 class="display-4 fw-bold text-success">{{ done }}</h1>
+            <p class="text-muted mb-0">Done</p>
+        </div>
+    </div>
+</div>
+
+<!-- High Priority Tasks -->
+{% if high_priority %}
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-danger text-white fw-semibold">
+        <i class="fas fa-exclamation-circle me-2"></i>High Priority — Needs Attention
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for task in high_priority %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/tasks/{{ task.pk }}/" class="text-decoration-none text-dark fw-semibold">{{ task.title }}</a>
+            <span class="badge bg-{{ task.status|yesno:'warning,secondary' }}">{{ task.get_status_display }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<!-- Recent Tasks -->
+<div class="card shadow-sm">
+    <div class="card-header fw-semibold"><i class="fas fa-clock me-2"></i>Recent Tasks</div>
+    {% if recent_tasks %}
+    <ul class="list-group list-group-flush">
+        {% for task in recent_tasks %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/tasks/{{ task.pk }}/" class="text-decoration-none text-dark">{{ task.title }}</a>
+            <div>
+                <span class="badge bg-dark me-1">{{ task.get_priority_display }}</span>
+                <span class="badge bg-secondary">{{ task.get_status_display }}</span>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <div class="card-body text-muted">No tasks yet. <a href="/tasks/create/">Create your first task</a>.</div>
+    {% endif %}
+</div>
 {% endblock %}
