@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Tags — TaskManager{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2 class="mb-4"><i class="fas fa-tags me-2"></i>Tags</h2>
+        {% if tags %}
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            {% for tag in tags %}
+            <span class="badge rounded-pill fs-6 p-2" style="background-color: {{ tag.color }}">{{ tag.name }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-muted">No tags yet. Create one using the form.</p>
+        {% endif %}
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body p-3">
+                <h5 class="card-title">Create Tag</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-2">
+                        <input type="text" name="name" class="form-control" placeholder="Tag name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small text-muted">Color</label>
+                        <input type="color" name="color" class="form-control form-control-color" value="#6c757d">
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">Create Tag</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

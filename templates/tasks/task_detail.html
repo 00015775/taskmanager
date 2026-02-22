@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}{{ task.title }} — TaskManager{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h2 class="card-title">{{ task.title }}</h2>
+                    {% if task.priority == 'high' %}
+                        <span class="badge bg-danger fs-6">High Priority</span>
+                    {% elif task.priority == 'medium' %}
+                        <span class="badge bg-warning text-dark fs-6">Medium Priority</span>
+                    {% else %}
+                        <span class="badge bg-secondary fs-6">Low Priority</span>
+                    {% endif %}
+                </div>
+
+                <p class="text-muted">{{ task.description|default:"No description provided." }}</p>
+
+                <hr>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <p class="mb-1 fw-semibold text-muted small">STATUS</p>
+                        <span class="badge bg-dark">{{ task.get_status_display }}</span>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="mb-1 fw-semibold text-muted small">DUE DATE</p>
+                        <p class="mb-0">{{ task.due_date|default:"Not set" }}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="mb-1 fw-semibold text-muted small">CREATED</p>
+                        <p class="mb-0">{{ task.created_at|date:"M d, Y" }}</p>
+                    </div>
+                </div>
+
+                {% if task.tags.all %}
+                <div class="mb-3">
+                    <p class="mb-1 fw-semibold text-muted small">TAGS</p>
+                    {% for tag in task.tags.all %}
+                    <span class="badge rounded-pill me-1" style="background-color: {{ tag.color }}">{{ tag.name }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="d-flex gap-2 mt-4">
+                    <a href="/tasks/{{ task.pk }}/edit/" class="btn btn-dark">
+                        <i class="fas fa-edit me-1"></i>Edit
+                    </a>
+                    <a href="/tasks/{{ task.pk }}/delete/" class="btn btn-outline-danger">
+                        <i class="fas fa-trash me-1"></i>Delete
+                    </a>
+                    <a href="/tasks/" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>Back to Tasks
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

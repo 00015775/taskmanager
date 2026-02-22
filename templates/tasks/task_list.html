@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %}My Tasks — TaskManager{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-list me-2"></i>My Tasks</h2>
+    <a href="/tasks/create/" class="btn btn-dark"><i class="fas fa-plus me-1"></i>New Task</a>
+</div>
+
+<!-- Filters -->
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-2 align-items-end">
+            <div class="col-md-3">
+                <label class="form-label fw-semibold">Status</label>
+                <select name="status" class="form-select">
+                    <option value="">All Statuses</option>
+                    <option value="todo" {% if status_filter == 'todo' %}selected{% endif %}>To Do</option>
+                    <option value="in_progress" {% if status_filter == 'in_progress' %}selected{% endif %}>In Progress</option>
+                    <option value="done" {% if status_filter == 'done' %}selected{% endif %}>Done</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-semibold">Priority</label>
+                <select name="priority" class="form-select">
+                    <option value="">All Priorities</option>
+                    <option value="low" {% if priority_filter == 'low' %}selected{% endif %}>Low</option>
+                    <option value="medium" {% if priority_filter == 'medium' %}selected{% endif %}>Medium</option>
+                    <option value="high" {% if priority_filter == 'high' %}selected{% endif %}>High</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-semibold">Tag</label>
+                <select name="tag" class="form-select">
+                    <option value="">All Tags</option>
+                    {% for tag in tags %}
+                    <option value="{{ tag.id }}" {% if tag_filter == tag.id|stringformat:"s" %}selected{% endif %}>{{ tag.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-dark w-100">Filter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Task Cards -->
+{% if tasks %}
+<div class="row g-3">
+    {% for task in tasks %}
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title mb-0">
+                        <a href="/tasks/{{ task.pk }}/" class="text-decoration-none text-dark">{{ task.title }}</a>
+                    </h5>
+                    {% if task.priority == 'high' %}
+                        <span class="badge bg-danger">High</span>
+                    {% elif task.priority == 'medium' %}
+                        <span class="badge bg-warning text-dark">Medium</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Low</span>
+                    {% endif %}
+                </div>
+                <p class="text-muted small mb-2">{{ task.description|truncatechars:80 }}</p>
+                {% if task.tags.all %}
+                <div class="mb-2">
+                    {% for tag in task.tags.all %}
+                    <span class="badge rounded-pill" style="background-color: {{ tag.color }}">{{ tag.name }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <span class="badge bg-dark">{{ task.get_status_display }}</span>
+                    <div>
+                        <a href="/tasks/{{ task.pk }}/edit/" class="btn btn-sm btn-outline-secondary me-1">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="/tasks/{{ task.pk }}/delete/" class="btn btn-sm btn-outline-danger">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-5 text-muted">
+    <i class="fas fa-inbox fa-3x mb-3"></i>
+    <p>No tasks found. <a href="/tasks/create/">Create one now</a>.</p>
+</div>
+{% endif %}
+{% endblock %}
+
