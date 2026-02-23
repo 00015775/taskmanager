@@ -170,16 +170,17 @@ taskmanager/
 
 ## Screenshots
 
-<video src="screenshots/app.mp4" controls width="100%" height="auto">
-  Your browser does not support the video tag.
-</video>
+<p align="center">
+  <img src="screenshots/app.gif" alt="High-quality App Demo GIF">
+</p>
 
-<img src="screenshots/dashboard.png" width="200" alt="Dashboard" />
-<img src="screenshots/login.png" width="200" alt="Login" />
-<img src="screenshots/profile.png" width="200" alt="Profile" />
-<img src="screenshots/taskedit.png" width="200" alt="Task details" />
-<img src="screenshots/tasklist.png" width="200" alt="Task list" />
-
+<p align="center">
+  <img src="screenshots/dashboard.png" alt="Dashboard" width="600">
+  <img src="screenshots/login.png" alt="Login" width="600">
+  <img src="screenshots/profile.png" alt="Profile" width="600">
+  <img src="screenshots/taskedit.png" alt="Task details" width="600">
+  <img src="screenshots/tasklist.png" alt="Task list" width="600">
+</p>
 
 ## Running Tests
 ```bash
