@@ -16,7 +16,8 @@ DATABASES = {
     }
 }
 
+# Only enforce SSL if explicitly enabled via env var
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=False, cast=bool)
+SESSION_COOKIE_SECURE = config('SECURE_SSL_REDIRECT', default=False, cast=bool)
+CSRF_COOKIE_SECURE = config('SECURE_SSL_REDIRECT', default=False, cast=bool)
