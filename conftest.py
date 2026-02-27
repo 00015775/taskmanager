@@ -1,5 +1,5 @@
 import os
-import django
+# import django
 from pathlib import Path
 
 
@@ -8,9 +8,9 @@ def pytest_configure(config):
         'DJANGO_SETTINGS_MODULE',
         'taskmanager.settings.development'
     )
-    
+
     BASE_DIR = Path(__file__).resolve().parent
-    
+
     from django.conf import settings
     if not settings.configured:
         settings.configure(
