@@ -1,0 +1,13 @@
+[flake8]
+max-line-length = 120
+exclude =
+    venv,
+    migrations,
+    staticfiles,
+    __pycache__,
+    .git,
+    docker
+per-file-ignores =
+    taskmanager/settings/*.py: F401, F403, F405
+    core/models.py: F401
+    

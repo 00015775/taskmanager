@@ -5,9 +5,9 @@ from .models import UserProfile
 
 
 class RegisterForm(UserCreationForm):
+
     email = forms.EmailField(required=True)
-    
-    class Meta:
+    class Meta:  # noqa: E301
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 

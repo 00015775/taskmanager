@@ -37,5 +37,3 @@ class TestAccounts:
     def test_profile_requires_login(self, client):
         response = client.get(reverse('profile'))
         assert response.status_code == 302
-
-

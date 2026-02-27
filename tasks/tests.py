@@ -40,7 +40,7 @@ class TestTasks:
     def test_user_can_edit_task(self, logged_in_client, user):
         task = Task.objects.create(title='Old Title', owner=user)
 
-        response = logged_in_client.post(
+        response = logged_in_client.post(  # noqa: F841
             reverse('task_edit', kwargs={'pk': task.pk}),
             {
                 'title': 'Updated Title',

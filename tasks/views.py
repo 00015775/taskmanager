@@ -102,5 +102,3 @@ def tag_list_view(request):
 
     tags = Tag.objects.all()
     return render(request, 'tasks/tag_list.html', {'tags': tags, 'form': form})
-
-

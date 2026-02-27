@@ -28,5 +28,3 @@ class TagForm(forms.ModelForm):
         widgets = {
             'color': forms.TextInput(attrs={'type': 'color'}),
         }
-
-        
