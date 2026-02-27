@@ -57,11 +57,12 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - static_files:/app/staticfiles
       - media_files:/app/media
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - web
     networks:
       - taskmanager_network
-
+      
 volumes:
   postgres_data:
   static_files:
