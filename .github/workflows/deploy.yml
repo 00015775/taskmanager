@@ -71,7 +71,7 @@ jobs:
       - name: Run coverage report
         run: |
           coverage run -m pytest
-          coverage report --min-coverage=60
+          coverage report --fail-under=60
 
   # JOB 2: Build and Push Docker Image
   build:
