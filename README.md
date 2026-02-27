@@ -2,7 +2,9 @@
 
 A full-stack task management web application built with Django, containerized with Docker, and deployed on Google Cloud Platform with HTTPS and a complete CI/CD pipeline.
 
- **Live at:** https://taskmanager-00015775.duckdns.org
+ **Live at:** https://taskmanager-00015775.duckdns.org 
+ * **Username**: admin
+ * **Password**: admin
 
 ## Features
 
