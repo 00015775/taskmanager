@@ -18,5 +18,7 @@ docker-compose.dev.yml
 README.md
 .pytest_cache
 .vscode/* 
-
+conftest.py
+pytest.ini
+.pytest_cache
 

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export DJANGO_SETTINGS_MODULE=taskmanager.settings.production
+
 echo "Waiting for PostgreSQL to be ready..."
 while ! nc -z $POSTGRES_HOST 5432; do
     sleep 1

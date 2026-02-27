@@ -1,18 +1,16 @@
 import os
-# import django
 from pathlib import Path
 
 
 def pytest_configure(config):
-    os.environ.setdefault(
-        'DJANGO_SETTINGS_MODULE',
-        'taskmanager.settings.development'
-    )
-
-    BASE_DIR = Path(__file__).resolve().parent
-
+    # Only configure settings if we're actually running pytest
+    # Never interfere with production Django settings
+    import django
     from django.conf import settings
+
     if not settings.configured:
+        BASE_DIR = Path(__file__).resolve().parent
+
         settings.configure(
             BASE_DIR=BASE_DIR,
             DEBUG=True,
@@ -68,4 +66,6 @@ def pytest_configure(config):
             LOGIN_URL='/accounts/login/',
             LOGIN_REDIRECT_URL='/',
             LOGOUT_REDIRECT_URL='/accounts/login/',
+            MESSAGE_STORAGE='django.contrib.messages.storage.cookie.CookieStorage',
         )
+        django.setup()
