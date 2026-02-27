@@ -31,7 +31,7 @@ jobs:
           --health-retries 5
 
     env:
-      DJANGO_SETTINGS_MODULE: taskmanager.settings.development
+      # DJANGO_SETTINGS_MODULE: taskmanager.settings.development
       SECRET_KEY: test-secret-key-for-ci-only
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/taskmanager_test
 
