@@ -8,6 +8,9 @@ A full-stack task management web application built with Django, containerized wi
 
 **Docker Image:** https://hub.docker.com/repository/docker/00015775/taskmanager/ (_under 200MB_)
 <!-- small comment here for testing -->
+<!-- small comment here for testing -->
+<!-- small comment here for testing -->
+<!-- small comment here for testing -->
 ## Features
 
 - User authentication (register, login, logout, profile management)
