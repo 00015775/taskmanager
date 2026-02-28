@@ -7,7 +7,7 @@ A full-stack task management web application built with Django, containerized wi
  * **Password**: admin
 
 **Docker Image:** https://hub.docker.com/repository/docker/00015775/taskmanager/ (_under 200MB_)
-
+<!-- small comment here for testing -->
 ## Features
 
 - User authentication (register, login, logout, profile management)
@@ -232,14 +232,14 @@ coverage report
 docker compose exec web pytest
 ```
 
-25 tests covering models, views, authentication, CRUD operations, and data isolation between users.
+9 tests covering user registration and login, profile access control, task creation, listing, editing and deletion, task model creation, and tag creation functionality.
 
 ## CI/CD Pipeline
 
 Every push to `main` branch automatically:
 
-1.  Runs flake8 code quality checks
-2.  Runs 25 pytest tests
+1.  Runs `flake8` code quality checks
+2.  Runs 9 pytest tests
 3.  Generates coverage report (minimum 60%)
 4.  Builds Docker image (multi-stage, non-root user)
 5.  Tags image with `latest` and commit SHA
@@ -296,7 +296,7 @@ flake8 . --max-line-length=120 \
          --exclude=venv,migrations,staticfiles,__pycache__ \
          --count --statistics
 ```
-If you see whitespace/blank errors, the run:
+If you see whitespace/blank errors, then run:
 ```
 # Auto-fix all whitespace issues across the whole project
 autopep8 --in-place --recursive \
@@ -304,4 +304,3 @@ autopep8 --in-place --recursive \
   --exclude=venv,migrations,staticfiles \
   .
 ```
-
