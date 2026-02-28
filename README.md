@@ -283,3 +283,25 @@ Every push to `main` branch automatically:
 6. Runs migrations and restarts services
 
 
+## Troubleshooting
+
+In case of errors at first stage of testing `Run Tests & Linting`, the most common reason are design related issues such as whitespace errors or blanks. To solve this, do as follows: 
+1. `python3.11 -m venv venv`
+2. `source venv/bin/activate` 
+3. `pip install -r requirements.txt`
+  
+First check locally if it is actuall whitespace or blank issues, to do this run:
+```
+flake8 . --max-line-length=120 \
+         --exclude=venv,migrations,staticfiles,__pycache__ \
+         --count --statistics
+```
+If you see whitespace/blank errors, the run:
+```
+# Auto-fix all whitespace issues across the whole project
+autopep8 --in-place --recursive \
+  --select=W291,W292,W293,W391 \
+  --exclude=venv,migrations,staticfiles \
+  .
+```
+
